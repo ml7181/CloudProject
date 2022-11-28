@@ -11,3 +11,53 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.inpfield {
+  background-color: rgb(242, 239, 239) !important;
+  width:99% !important
+}
+.labelstyle{
+  font-size: normal;
+  color:rgb(123, 117, 117) !important;
+  width: 100% !important;
+  text-align: left !important;
+  font-weight: 100;
+  font-family: -apple-system !important;
+  font-weight:bold;
+  padding-top:10%;
+  padding-bottom:10%;
+  white-space: nowrap;
+}
+.buttonstyle{
+  background-color:rgb(178, 172, 172) ;
+}
+.buttonnamestyle{
+  font-size:normal;
+  color:azure;
+}
+.containerinpstyle{
+  margin-top:2% !important;
+}
+.iconstyle{
+  white-space: nowrap;
+  margin-right: 20px;
+}
+a:active{
+  color:white
+}
+
+.containerinpstylenolabel{
+  margin-top:15px !important;
+}
+.inpfieldcc{
+  background-color: rgb(242, 239, 239) !important;
+  width:99% !important
+}
+.paymenticonstyle{
+  width: 40%;
+  height: 30%;
+  margin-top: 2%;
+}
+.paymentbuttonstyle{
+  margin-top: 7% !important;
+}
