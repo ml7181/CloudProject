@@ -2,6 +2,7 @@ import { Visa } from "react-pay-icons";
 import { Mastercard } from "react-pay-icons";
 import { Applepay } from "react-pay-icons";
 import {Googlepay} from "react-pay-icons";
+
 const Paymenticons = () => {
     return (
         <div className="container-fluid">
