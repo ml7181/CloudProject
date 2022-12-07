@@ -1,5 +1,5 @@
 import InputFieldNoLabel from "./inputFieldNoLabel";
-import { Visa } from "react-pay-icons";
+
 const Creditcardnumber = () => {
     return (
         <div className="container-fluid">

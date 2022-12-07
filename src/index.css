@@ -64,3 +64,25 @@ a:active{
 .table-responsive {
   max-height:100px;
 }
+.dropdownstyle{
+  margin-left: 10px;
+  background-color: rgb(242, 239, 239) !important;
+}
+.postbuttonstyle{
+  margin-top: 5% !important;
+}
+.textareastyle{
+  margin-top: 5%;
+  margin-left: 10px;
+  background-color: rgb(242, 239, 239) !important;
+}
+.maincontainerstyle{
+  margin-top: 5%;
+}
+.searchstyle{
+  background-color: rgb(242, 239, 239) !important;
+  border-style: solid 10px;
+}
+.card {
+  display:inline-block !important;
+}
