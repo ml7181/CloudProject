@@ -85,4 +85,7 @@ a:active{
 }
 .card {
   display:inline-block !important;
+  margin-top: 2%;
+  margin-right: 2%;
+  background-color: rgb(242, 239, 239) !important;
 }

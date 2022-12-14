@@ -1,6 +1,6 @@
 import Navbar from "./components/navbar";
 import Searchbar from "./components/Searchbar";
-import { useState } from 'react';
+import { useState , useEffect} from 'react';
 import Button from "./components/button";
 import product1 from "./product1.png";
 // import ImportScript from './scriptimport';
@@ -19,6 +19,7 @@ const HomePage = () => {
         body1:"body1",
         body2:"body3"
     }]
+    let initialproducts
     const [productstate,setProducState] = useState([]);
     var apigClient = window.apigClientFactory.newClient();
     console.log(apigClient);
@@ -43,15 +44,29 @@ const HomePage = () => {
     //   };
       //productList=initialList
       //const [productList,setProductList] = useState(initialList)
-      apigClient.productsGet(params,{},{})
-      .then(function(result){
-        // Add success callback code here.
-        console.log(result);
-        setProducState(result);
-      }).catch( function(result){
-        console.log("error api")
-        // Add error callback code here.
-      });
+
+    //   apigClient.productsGet(params,{},{})
+    //   .then(function(result){
+    //     // Add success callback code here.
+    //     console.log(result);
+    //     setProducState(result);
+    //   }).catch( function(result){
+    //     console.log("error api")
+    //     // Add error callback code here.
+    //   });
+    
+    useEffect(() => {
+        apigClient.productsGet(params,{},{})
+        .then(function(result){
+          // Add success callback code here.
+          console.log("result from api");
+          console.log(result);
+          setProducState(result.data);
+        }).catch( function(result){
+          console.log("error api")
+          // Add error callback code here.
+        });
+    },[])
    
     //to do: on search event, update state variable with the new list
     return (    
@@ -83,36 +98,49 @@ const HomePage = () => {
                             //     </div>
                             // </li>
                             
-                            <div className="card">
-                                <h5 class="card-header">{}</h5>
-                                    <div className="card-body">
-                                         {/* <h5 class="card-title">{product.body1}</h5>
-                                         <p class="card-text">{product.body2}</p>
-                                         <a href="#" class="btn btn-primary">Go somewhere</a> */}
-                                         <div className="container-fluid">
-                                            <div className="row">
-                                                <div className="col col-sm-7 col-md-7 col-lg-7">
-                                                    {/* <img src={product1}></img> */}
-                                                    Image here
-                                                </div>
+                            // <div className="card">
+                            //     <h5 class="card-header">{}</h5>
+                            //         <div className="card-body">
+                            //              {/* <h5 class="card-title">{product.body1}</h5>
+                            //              <p class="card-text">{product.body2}</p>
+                            //              <a href="#" class="btn btn-primary">Go somewhere</a> */}
+                            //              <div className="container-fluid">
+                            //                 <div className="row">
+                            //                     <div className="col col-sm-7 col-md-7 col-lg-7">
+                            //                         {/* <img src={product1}></img> */}
+                            //                         Image here
+                            //                     </div>
 
-                                                <div className="col col-sm-5 col-md-5 col-lg-5">
-                                                    <ul>
-                                                        <li>
-                                                            {product.label}
-                                                        </li>
-                                                        <li>
-                                                            <Button name="add to cart" handler={()=>{console.log("clicked")}}></Button>
-                                                        </li>
-                                                        <li>
-                                                            {product.price}
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                            </div>   
+                            //                     <div className="col col-sm-5 col-md-5 col-lg-5">
+                            //                         <ul>
+                            //                             <li>
+                            //                                 {product.label}
+                            //                             </li>
+                            //                             <li>
+                            //                                 <Button name="add to cart" handler={()=>{console.log("clicked")}}></Button>
+                            //                             </li>
+                            //                             <li>
+                            //                                 {product.price}
+                            //                             </li>
+                            //                         </ul>
+                            //                     </div>
+                            //                 </div>
+                            //             </div>
+                            //         </div>
+                            // </div>   
+                            <div key={product.label} className="card" style={{width: "31.2%"}}>
+                                <img class="card-img-top" src={"https://furniture4017.s3.amazonaws.com"+product.image_File} alt="Card image cap"></img>
+
+                                 <div class="card-body">
+                                    <h5 class="card-title">{product.label}</h5>
+                                    {/* <p class="card-text">{product.label}</p> */}
+                                </div>
+
+                                <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><b>{product.price}</b></li>
+                                <li class="list-group-item"><Button name="Add to Cart"></Button></li>
+                                </ul>
+                            </div>
                         )
                     }
                     )
