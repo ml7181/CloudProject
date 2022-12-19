@@ -89,3 +89,7 @@ a:active{
   margin-right: 2%;
   background-color: rgb(242, 239, 239) !important;
 }
+.styleforbutton{
+  margin-bottom: 0% !important;
+  margin-top:0 !important
+}

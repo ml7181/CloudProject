@@ -9,8 +9,11 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 import Payment from './Payment'
 import Orderconfirmation from './Orderconfirmation';
 import CreateListing from './CreateListing';
+import ShoppingCart from './cart';
 import HomePage from './homepage';
 import ImportScript from './scriptimport';
+import Login2 from './Login';
+import Register from './Register';
 // import apigClient from './apiGateway-js-sdk/ApigClient';
 // import apiGatewayClient from './apiGateway-js-sdk/lib/apiGatewayCore/apiGatewayClient'
 // import sigV4ClientConfig from './apiGateway-js-sdk/lib/apiGatewayCore/sigV4ClientConfig'

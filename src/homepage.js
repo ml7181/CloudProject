@@ -21,6 +21,7 @@ const HomePage = () => {
     }]
     let initialproducts
     const [productstate,setProducState] = useState([]);
+    const [searchentry,setsearchentry] = useState("");
     var apigClient = window.apigClientFactory.newClient();
     console.log(apigClient);
     var params = {
@@ -30,6 +31,7 @@ const HomePage = () => {
       var body = {
         test:"test"
       };
+   
     //   var additionalParams = {
     //     // If there are any unmodeled query parameters or headers that must be
     //     //   sent with the request, add them here.
@@ -54,7 +56,39 @@ const HomePage = () => {
     //     console.log("error api")
     //     // Add error callback code here.
     //   });
-    
+    const searchentry_change = (event) =>
+    {
+        setsearchentry(event.target.value);
+    }
+    const search = () => {
+        var params = {
+            //path: "/carts",
+            // email: email_password["email"],
+            // password:email_password["password"]
+            // headers:{
+            //     "content-type":"application/json"
+            // }
+            keyword:searchentry
+          };
+          var additionalParams = {
+            // headers:{
+            //     "Content-Type":"application/json"
+            // },
+            queryParams:{
+              keyword: searchentry
+            }
+          }
+          apigClient.opensearchGet(params,{},additionalParams)
+          .then((res) => {
+            console.log("success");
+            console.log(res);
+          })
+          .catch((err)=>{
+            console.log("error");
+            console.log(err);
+          })
+    }
+
     useEffect(() => {
         apigClient.productsGet(params,{},{})
         .then(function(result){
@@ -75,7 +109,11 @@ const HomePage = () => {
     <div className="container-fluid maincontainerstyle">
     <div className="row">
         <div className="col offset-sm-2 offset-md-2 offset-lg-2 col-sm-7 col-md-7 col-lg-7">
-        <Searchbar placeholder="Search"></Searchbar>
+        <Searchbar onchange_func={searchentry_change} value={searchentry} placeholder="Search"></Searchbar>
+        </div>
+
+        <div className="styleforbutton col offset-sm-10 offset-md-10 offset-lg-10 col-sm-2 col-md-2 col-lg-2">
+        <Button name="Search" handler={search}></Button>
         </div>
     </div>
     <div className="row maincontainerstyle">
