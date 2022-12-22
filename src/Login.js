@@ -13,6 +13,7 @@ import { Link,Switch } from 'react-router-dom';
 import { BrowserRouter,Routes } from 'react-router-dom';
 import HomePage from './homepage.js';
 import { Navigate,useNavigate } from 'react-router-dom';
+
 const Login2 = () => {
   const navigate = useNavigate();
   const login_handle = ()=>{
@@ -42,11 +43,13 @@ const Login2 = () => {
       Cookies.set('email',res.data.email);
       Cookies.set('username',res.data.username);
       Cookies.set('location',res.data.location);
+      Cookies.set('userid',res.data.user_id);
       // return <Navigate to="/home" replace={true}/>;
       const c_username = Cookies.get('username');
       const c_email = Cookies.get('email');
       const c_location = Cookies.get('location');
-      navigate("/home?username="+c_username+"&email="+c_email+"&location="+c_location)
+      const c_userid = Cookies.get('userid');
+      navigate("/home?username="+c_username+"&email="+c_email+"&location="+c_location+"&userid="+c_userid)
       // navigate("/home",{ state:  {"username":c_username,"email":c_email,"location":c_location} });
       //redirect to home page
     })

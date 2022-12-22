@@ -15,9 +15,11 @@ const HomePage = () => {
     const username = searchParams.get('username');
     const email = searchParams.get('email');
     const location_c = searchParams.get('location');
+    const userid_c = searchParams.get('userid');
     console.log(username);
     console.log(email);
     console.log(location_c);
+    console.log(userid_c);
     let productList = [{
         header:"header",
         body1:"body",
@@ -37,7 +39,8 @@ const HomePage = () => {
     console.log("props:"+username+" "+email+" "+location_c);
     var params = {
         path: "/products",
-        location: location_c//"Brooklyn"
+        location: location_c,
+        userid:userid_c//"Brooklyn"
       };
       var body = {
         test:"test"
@@ -138,12 +141,39 @@ const HomePage = () => {
     }
 
     useEffect(() => {
-        apigClient.productsGet(params,{},{})
+      var params = {
+        path: "/products",
+        location: location_c,
+        userid:userid_c//"Brooklyn"
+      };
+      var additionalParams = {
+        queryParams:{
+          location: location_c,
+          userid:userid_c
+        }
+      };
+        apigClient.productsGet(params,{},additionalParams)
         .then(function(result){
           // Add success callback code here.
           console.log("result from api");
           console.log(result);
-          setProducState(result.data);
+          var temp = []
+          result.data.map((product) =>{
+            var temp_sub = {}
+            if("productlink" in product)
+            {
+              temp_sub["image_File"] = product["productlink"];
+            }
+            else{
+              temp_sub["image_File"] = product["image_File"];
+            }
+            temp_sub["label"] = product["label"];
+            temp_sub["price"] = product["price"];
+            temp_sub["product_id"] = product["product_id"];
+            temp.push(temp_sub);
+          })
+          setProducState(temp);
+          
         }).catch( function(result){
           console.log("error api")
           // Add error callback code here.

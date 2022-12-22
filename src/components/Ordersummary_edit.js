@@ -13,10 +13,19 @@ const Ordersummary_edit = ({list,tax}) => {
 // }
 
 let SubTotal = list.reduce((total,item)=>{
-    total += item.total;
+    console.log(item);
+    if(typeof item.total === 'string')
+    {
+    total += parseInt(item.total.replace(/[^0-9]/g, ''));
+    }
+    else{
+        total += parseInt(item.total);
+    }
     return total;
 },0)
-const [productstate,setProductState] = useState({"prod":list,"tot":SubTotal});
+
+// const [productstate,setProductState] = useState({"prod":list,"tot":SubTotal});
+
 // const changeqty = (event,index) =>{
 //     //todo check against the available inventory if these many items are actuallly available
 //     //if yes, do all these and update in DB
@@ -78,7 +87,8 @@ return (
     </tr>
     </thead>
     <tbody>
-    {productstate.prod.map((product,index) => {
+    {/* {productstate.prod.map((product,index) => { */}
+    {list.map((product,index) => {
         return(
         <tr key={product.img}>
             <td><img src={product.img} width="80px" height="80px" style={{"verticalAign":"middle"}}></img></td>
@@ -94,7 +104,8 @@ return (
     <td></td>
     <td></td>
     <td></td>
-    <td><b>{"SubTotal: $"+productstate.tot}</b></td>
+    {/* <td><b>{"SubTotal: $"+productstate.tot}</b></td> */}
+    <td><b>{"SubTotal: $"+SubTotal}</b></td>
     </tr>
 
     <tr>
@@ -110,7 +121,8 @@ return (
         <td></td>
         <td></td>
         <td></td>
-        <td><b>{"Total: $"+(productstate.tot+(tax || 0))}</b></td>
+        {/* <td><b>{"Total: $"+(productstate.tot+(tax || 0))}</b></td> */}
+        <td><b>{"Total: $"+(SubTotal+(tax || 0))}</b></td>
     </tr>
     </tbody>
 </table>

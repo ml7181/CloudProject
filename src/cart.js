@@ -7,6 +7,7 @@ import Button from './components/button.js';
 import { useState , useEffect} from 'react';
 import Cookies from 'js-cookie';
 import { Navigate,useNavigate } from 'react-router-dom';
+import {v4 as uuidv4} from 'uuid';
 // const myList = [{
 //     img:product1,
 //     name:"table lamp",
@@ -26,13 +27,53 @@ import { Navigate,useNavigate } from 'react-router-dom';
 
 const ShoppingCart = () =>{
     const navigate = useNavigate();
+    var apigClient = window.apigClientFactory.newClient();
     const checkout_handle = () => {
-        navigate("/payment");
+        //navigate("/payment");
+        //create order
+        const orderid = uuidv4();
+        const buyer_email = Cookies.get('email');
+        var product_ids = [];
+        productstate.map(product=>{
+            product_ids.push(product['product_id'])
+        });
+        const location = Cookies.get('location');
+        var params = {
+            "order_id":orderid,
+            "buyer_email":buyer_email,
+            "location":location
+        }
+        var additionalParams = {
+            headers:{
+                "content-type":"application/json"
+            },
+            queryParams:{
+                "order_id":orderid,
+                "buyer_email":buyer_email,
+                "location":location
+            }
+        }
+        var body = {
+            "product_ids":product_ids
+        }
+        apigClient.ordersPost(params,body,additionalParams)
+        .then((res)=> {
+            console.log("success - order created")
+            console.log(res)
+
+            //navigate to order confirmation page
+            navigate("/orderconfirmation?"+orderid)
+        })
+        .catch((err) => {
+            console.log(err);
+            console.log("error");
+        })
     }
+
     const [productstate,setProducState] = useState([]);
     useEffect(() => {
        
-        var apigClient = window.apigClientFactory.newClient();
+       
         const c_email = Cookies.get('email');
         var params = {
             email:c_email,
@@ -49,12 +90,18 @@ const ShoppingCart = () =>{
           console.log(result);
           var temp = []
           result.data.map(product=>{
+            const exchangeRate = 0.013;
+            var pp = parseInt(product['price'].replace(/[^0-9]/g, ''));
+            if(product['price'].includes("rs") || product['price'].includes("Rs"))
+            {
+            pp = pp*exchangeRate;
+            }
             temp.push({
                 img:product.image_File,
                 name:product.label,
-                price:product.price,
+                price:pp,//product.price,
                 qty:1,
-                total:product.price,
+                total:pp,//product.price,
                 product_id:product.product_id
             })
           });

@@ -3,8 +3,14 @@ import Orderconfirmationmessage from "./components/Orderconfirmationmessage";
 import Ordersummary from "./components/Ordersummary";
 import product1 from "./product1.png";
 import product2 from "./product2.png";
+import { useLocation } from 'react-router-dom';
+import Cookies from 'js-cookie';
 const Orderconfirmation = () =>{
     //this needs to probably use name and the array passed as props
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
+    const orderid = searchParams.get('orderid');
+    const username = Cookies.get('username');
 let my_list = [{
     img:product1,
     name:"table lamp",
@@ -31,13 +37,13 @@ return (
 
         <div className="row containerinpstyle">
             <div className="col col-sm-5 col-md-5 col-lg-5">
-            <Orderconfirmationmessage name="User" orderno=
-            '12' email="123@xyz.com"></Orderconfirmationmessage>
+            <Orderconfirmationmessage name={username} orderno=
+            {orderid} email="rl4017@nyu.edu"></Orderconfirmationmessage>
             </div>
 
-            <div className="col col-sm-7 col-md-7 col-lg-7">
+            {/* <div className="col col-sm-7 col-md-7 col-lg-7">
                 <Ordersummary list={my_list}></Ordersummary>
-            </div>
+            </div> */}
         </div>
     </div>
 )
