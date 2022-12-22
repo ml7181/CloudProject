@@ -32,6 +32,7 @@ code {
   background-color:rgb(178, 172, 172) ;
 }
 .buttonnamestyle{
+  text-align: center !important;
   font-size:normal;
   color:azure;
 }
@@ -91,5 +92,32 @@ a:active{
 }
 .styleforbutton{
   margin-bottom: 0% !important;
-  margin-top:0 !important
+  margin-top:0 !important;
+  padding-left:5% !important;
+  padding-bottom:4% !important;
+}
+.buttonstyle{
+  padding-left: 5% !important;
+}
+.searchbarstyle{
+  padding-top: 1.75% !important;
+}
+.loginstyle{
+  margin-top: 20% !important;
+}
+.emailstyle{
+  margin-top: 4% !important;
+}
+.passtyle{
+  margin-top: 2% !important;
+}
+.buttonstyleadjust{
+  margin-left: 0% !important;
+}
+.buttonwidth{
+  width:100px !important;  
+} 
+.errorstyle{
+  align-items: center !important;
+  text-align: center;
 }

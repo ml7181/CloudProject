@@ -42,7 +42,7 @@ import { useState , useEffect} from 'react';
             reader.onloadend = () => {
                 setfile({
                   file: file_e,
-                  fileDataUrl: reader.result
+                  fileDataUrl: (reader.result)
                 });
               };
               reader.readAsDataURL(file_e);
@@ -111,7 +111,7 @@ import { useState , useEffect} from 'react';
                 "productprice":pprice,
                 "productqty":qty,
                 "username":"ml7181@nyu.edu", //to be replaced by session variable
-                "location":"Brooklyn",//to be replaced by session variable
+                "location":"New York",//to be replaced by session variable
                 "condition":pcond,
                 "file":file.fileDataUrl
                 //"file":fileb64

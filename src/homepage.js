@@ -4,11 +4,19 @@ import { useState , useEffect} from 'react';
 import Button from "./components/button";
 import product1 from "./product1.png";
 // import ImportScript from './scriptimport';
-
+import { useLocation } from 'react-router-dom';
 
 const HomePage = () => {
     //product list is assumed to be an array of objects
     //initialList is the list of products we want to display before anyhting else is searched
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
+    const username = searchParams.get('username');
+    const email = searchParams.get('email');
+    const location_c = searchParams.get('location');
+    console.log(username);
+    console.log(email);
+    console.log(location_c);
     let productList = [{
         header:"header",
         body1:"body",
@@ -22,11 +30,13 @@ const HomePage = () => {
     let initialproducts
     const [productstate,setProducState] = useState([]);
     const [searchentry,setsearchentry] = useState("");
+    const [curproduct,setcurproduct] = useState({});
     var apigClient = window.apigClientFactory.newClient();
     console.log(apigClient);
+    console.log("props:"+username+" "+email+" "+location_c);
     var params = {
         path: "/products",
-        location: "Athurugiriya,  Colombo"
+        location: location_c//"Brooklyn"
       };
       var body = {
         test:"test"
@@ -56,6 +66,34 @@ const HomePage = () => {
     //     console.log("error api")
     //     // Add error callback code here.
     //   });
+    const addtocart = (pro) =>
+    {
+      console.log(pro);
+      var params = {
+        username:email,//"ml7181@nyu.edu",
+        headers:{
+            "Content-Type":"application/json"
+        }
+    };
+    var additionalParams = {
+        queryParams:{
+          username:email,//"ml7181@nyu.edu"
+        },
+        headers:{
+            "Content-Type":"application/json"
+        }
+    };
+    var body = pro;
+      apigClient.cartsPost(params,body,additionalParams)
+      .then((res)=>{
+        console.log("success");
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+        console.log("error");
+      })
+    }
     const searchentry_change = (event) =>
     {
         setsearchentry(event.target.value);
@@ -68,20 +106,29 @@ const HomePage = () => {
             // headers:{
             //     "content-type":"application/json"
             // }
-            keyword:searchentry
+            keyword:searchentry,
+            location:location_c//"Brooklyn"
           };
           var additionalParams = {
             // headers:{
             //     "Content-Type":"application/json"
             // },
             queryParams:{
-              keyword: searchentry
+              keyword: searchentry,
+              location: location_c//"Brooklyn" //to be replaced by session loc
             }
           }
           apigClient.opensearchGet(params,{},additionalParams)
           .then((res) => {
             console.log("success");
             console.log(res);
+            let data_arr = [];
+            res.data.map(product=>data_arr.push({
+              'image_File':product['productlink'],
+              'label':product['productname'],
+              'price':product['productprice']
+            }));
+            setProducState(data_arr);
           })
           .catch((err)=>{
             console.log("error");
@@ -112,8 +159,8 @@ const HomePage = () => {
         <Searchbar onchange_func={searchentry_change} value={searchentry} placeholder="Search"></Searchbar>
         </div>
 
-        <div className="styleforbutton col offset-sm-10 offset-md-10 offset-lg-10 col-sm-2 col-md-2 col-lg-2">
-        <Button name="Search" handler={search}></Button>
+        <div className="styleforbutton col-sm-3 col-md-3 col-lg-3">
+        <Button className = "buttonstyle" name="Search" handler={search}></Button>
         </div>
     </div>
     <div className="row maincontainerstyle">
@@ -167,7 +214,8 @@ const HomePage = () => {
                             //         </div>
                             // </div>   
                             <div key={product.label} className="card" style={{width: "31.2%"}}>
-                                <img class="card-img-top" src={"https://furniture4017.s3.amazonaws.com"+product.image_File} alt="Card image cap"></img>
+                                {/* <img class="card-img-top" src={"https://furniture4017.s3.amazonaws.com"+product.image_File} alt="Card image cap"></img> */}
+                                <img class="card-img-top" src={product.image_File} alt="Card image cap"></img>
 
                                  <div class="card-body">
                                     <h5 class="card-title">{product.label}</h5>
@@ -176,7 +224,7 @@ const HomePage = () => {
 
                                 <ul class="list-group list-group-flush">
                                 <li class="list-group-item"><b>{product.price}</b></li>
-                                <li class="list-group-item"><Button name="Add to Cart"></Button></li>
+                                <li class="list-group-item"><Button name="Add to Cart" handler={() => addtocart(product)}></Button></li>
                                 </ul>
                             </div>
                         )

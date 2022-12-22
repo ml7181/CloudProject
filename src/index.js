@@ -58,5 +58,5 @@ let list = [{
 
 
 //let apigClient = apigClientFactory.newClient();
-ReactDOM.createRoot(document.getElementById('root')).render(<HomePage/>)
 
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>)

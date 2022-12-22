@@ -1,4 +1,5 @@
 import { Cart, Person } from 'react-bootstrap-icons';
+import { Link,Switch } from 'react-router-dom';
 const Navbar = () =>{
 return (
     <>
@@ -12,10 +13,14 @@ return (
     </ul>
 
     <span className='ms-auto'>
-    <a href="#" className="nav navbar-nav navbar-right">
+    {/* <a href="#" className="nav navbar-nav navbar-right"> */}
+    <Link to="/cart">
     <Cart className="iconstyle" color="white" size={30}></Cart>
+    </Link>
+    {/* </a> */}
+    <Link to="/createlisting">
     <Person color="white" size={30}></Person>
-    </a>
+    </Link>
     </span>
 </nav>
     </>
