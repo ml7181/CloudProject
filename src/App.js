@@ -11,6 +11,7 @@ import Login2 from './Login.js';
 import HomePage from './homepage.js';
 import CreateListing from './CreateListing.js';
 import Payment from './Payment.js';
+import StripeContainer from './components/stripe/StripeContainer.js';
 const App = () => {
   return (
   <Router>
@@ -20,7 +21,7 @@ const App = () => {
     <Route path="/home" element={<HomePage/>} />
     <Route path="/cart" element={<ShoppingCart/>} />
     <Route path="/createlisting" element={<CreateListing/>} />
-    <Route path="/payment" element={<Payment/>} />
+    <Route path="/payment" element={<StripeContainer/>} />
   </Routes>
   </Router>
     // <div className="container-fluid">

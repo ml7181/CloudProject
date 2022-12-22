@@ -1,4 +1,5 @@
 import InputField from './components/inputField.js';
+import TawkMessengerReact from '@tawk.to/tawk-messenger-react';
 import Button from './components/button.js'
 import Navbar from './components/navbar.js';
 import { useState , useEffect} from 'react';
@@ -80,6 +81,12 @@ const Register = () => {
               <Button name="Confirm" size="large" handler={register}></Button>
         </div>
       </div>
+
+      <div className="App">
+            <TawkMessengerReact
+                propertyId="63a4c9b1daff0e1306ddf63a"
+                widgetId="1gktr7nkh"/>
+        </div>
     </div>
   )
 }
