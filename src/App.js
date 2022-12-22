@@ -11,6 +11,7 @@ import Login2 from './Login.js';
 import HomePage from './homepage.js';
 import CreateListing from './CreateListing.js';
 import Payment from './Payment.js';
+import Orderconfirmation from './Orderconfirmation.js';
 const App = () => {
   return (
   <Router>
@@ -21,6 +22,7 @@ const App = () => {
     <Route path="/cart" element={<ShoppingCart/>} />
     <Route path="/createlisting" element={<CreateListing/>} />
     <Route path="/payment" element={<Payment/>} />
+    <Route path="/orderconfirmation" element={<Orderconfirmation/>} />
   </Routes>
   </Router>
     // <div className="container-fluid">

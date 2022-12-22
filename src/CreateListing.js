@@ -5,6 +5,7 @@ import Button from "./components/button";
 import TextArea from "./components/TextArea";
 import { Buffer } from 'buffer';
 import { useState , useEffect} from 'react';
+import Cookies from 'js-cookie';
     function CreateListing() {
         let choices = ["Bedding","Kitchenware"];
         let defaultChoice = "Select a category";
@@ -19,7 +20,9 @@ import { useState , useEffect} from 'react';
         const [qty,setqty] = useState(0);
         const [category,setcategory] = useState("");
         const [pcond,setpcond] = useState("");
-      
+       
+        const c_email = Cookies.get('email');
+        const c_location = Cookies.get('location');
         const pname_save = (event) =>{
             console.log(event.target.value);
             setpname(event.target.value);
@@ -110,8 +113,8 @@ import { useState , useEffect} from 'react';
                 "productdesc":pdesc,
                 "productprice":pprice,
                 "productqty":qty,
-                "username":"ml7181@nyu.edu", //to be replaced by session variable
-                "location":"New York",//to be replaced by session variable
+                "username":c_email,//"ml7181@nyu.edu", //to be replaced by session variable
+                "location":c_location,//"New York",//to be replaced by session variable
                 "condition":pcond,
                 "file":file.fileDataUrl
                 //"file":fileb64
