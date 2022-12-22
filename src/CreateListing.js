@@ -1,6 +1,7 @@
 import Navbar from "./components/navbar";
 import Dropdown from "./components/Dropdown";
 import InputFieldNoLabel from "./components/inputFieldNoLabel";
+import TawkMessengerReact from '@tawk.to/tawk-messenger-react';
 import Button from "./components/button";
 import TextArea from "./components/TextArea";
 import { Buffer } from 'buffer';
@@ -150,6 +151,11 @@ import Cookies from 'js-cookie';
                         <Button name="Post" size="large" handler={create_listing}></Button>
                         </div>
                     </div>
+                </div>
+                <div className="App">
+                        <TawkMessengerReact
+                            propertyId="63a4c9b1daff0e1306ddf63a"
+                            widgetId="1gktr7nkh"/>
                 </div>
             </>
         );

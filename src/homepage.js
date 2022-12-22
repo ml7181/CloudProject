@@ -1,5 +1,6 @@
 import Navbar from "./components/navbar";
 import Searchbar from "./components/Searchbar";
+import TawkMessengerReact from '@tawk.to/tawk-messenger-react';
 import { useState , useEffect} from 'react';
 import Button from "./components/button";
 import product1 from "./product1.png";
@@ -265,6 +266,11 @@ const HomePage = () => {
             {/* </ul> */}
         </div> 
     </div>
+    <div className="App">
+            <TawkMessengerReact
+                propertyId="63a4c9b1daff0e1306ddf63a"
+                widgetId="1gktr7nkh"/>
+        </div>
     </div>
     </>
     )
